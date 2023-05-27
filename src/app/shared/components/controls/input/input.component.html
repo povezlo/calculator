@@ -1,13 +1,13 @@
 <input
   type="text"
   class="app-input"
-  [(ngModel)]="value"
-  [value]="value | formatCurrency"
+  [value]="investmentAmount"
   [placeholder]="placeholder"
   [disabled]="isDisabled"
   (change)="onKeyup($event)"
   (blur)="onBlur()"
   appDigitsLimit
 >
-<button>-</button><button>+</button>
+  <button (click)="decreaseAmount()" class="calculator__button">-</button>
+  <button (click)="increaseAmount()" class="calculator__button">+</button>
 

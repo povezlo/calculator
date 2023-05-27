@@ -1,6 +1,7 @@
 import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Amount } from 'src/app/shared/interfaces';
+import { transformCurrency, transformUSDtoNumber } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-input',
@@ -17,14 +18,14 @@ import { Amount } from 'src/app/shared/interfaces';
 export class InputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Output() changed = new EventEmitter<string>();
-  value = '';
+  investmentAmount = '';
   isDisabled = false;
 
   private propagateChange: (fn: any) => void = (fn: any) => {};
   private propagateTouched: () => void = () => {};
 
   writeValue(value: string): void {
-    this.value = value ?? Amount.OneThousand;
+    this.investmentAmount = value ?? Amount.OneThousand;
   }
 
   registerOnChange(fn: any): void {
@@ -40,12 +41,32 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   onKeyup(eventInput: Event): void {
-    this.value = (<HTMLInputElement>eventInput.target).value;
-    this.propagateChange(this.value);
-    this.changed.emit(this.value);
+    this.investmentAmount = (<HTMLInputElement>eventInput.target).value;
+    this.propagateChange(this.investmentAmount);
+    this.changed.emit(this.investmentAmount);
   }
 
   onBlur(): void {
     this.propagateTouched();
+  }
+
+  decreaseAmount() {
+    let clearNumber = transformUSDtoNumber(this.investmentAmount);
+
+    clearNumber = clearNumber - 1000;
+
+    const formatCurrency = transformCurrency(clearNumber, { maxValue: true });;
+
+    this.investmentAmount = `$${formatCurrency}`;
+  }
+
+  increaseAmount() {
+    let clearNumber = transformUSDtoNumber(this.investmentAmount);
+
+    clearNumber = clearNumber + 1000;
+
+    const formatCurrency = transformCurrency(clearNumber, { maxValue: false });;
+
+    this.investmentAmount = `$${formatCurrency}`;
   }
 }

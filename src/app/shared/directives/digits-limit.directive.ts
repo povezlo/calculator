@@ -1,35 +1,42 @@
+import { CurrencyPipe } from '@angular/common';
 import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Amount, MIN_VALUE_ONE_THOUSAND, NON_LETTER_PATTERN, NUMERIC_PATTERN } from '../interfaces';
+import { transformUSDtoNumber, transformCurrency } from '../utils';
 
 @Directive({
-  selector: '[appDigitsLimit]'
+  selector: '[appDigitsLimit]',
+  providers: [CurrencyPipe]
 })
 export class DigitsLimitDirective {
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef, private currencyPipe: CurrencyPipe) {}
 
-  @HostListener('input', ['$event']) onInput(event: any) {
+  @HostListener('input', ['$event']) onInput(event: Event) {
     const initialValue = this.el.nativeElement.value;
-    const cleanValue = initialValue.replace(/[^0-9,.]/g, '');
-    const lastChar = cleanValue.charAt(cleanValue.length - 1);
+    const currency = initialValue.replace(NON_LETTER_PATTERN, '');
 
-    if (lastChar === ',' && cleanValue.indexOf(',') !== cleanValue.lastIndexOf(',')) {
-      this.el.nativeElement.value = `$${cleanValue.slice(0, -1)}`;
-    } else {
-      this.el.nativeElement.value = `$${cleanValue}`;
-    }
+    const clearNumber = transformUSDtoNumber(currency);
+
+    const formatCurrency = transformCurrency(clearNumber, { maxValue: false });
+
+
+    this.el.nativeElement.value =  `$${formatCurrency}`;
+    this.currencyPipe.transform(parseFloat(formatCurrency));
+
     if (initialValue !== this.el.nativeElement.value) {
       event.stopPropagation();
     }
-        const minValue = 1000;
-    const maxValue = 1000000;
-    let number = 0;
+  }
 
-    if (typeof cleanValue === 'string'  && /^[$,\d]+$/.test(cleanValue)) {
-      number = parseFloat(String(cleanValue).replace(/[^0-9.]/g, ''));
+  @HostListener('blur', ['$event']) onBlur(event: Event) {
+    const initialValue = this.el.nativeElement.value;
+    const currentNumber = parseFloat(String(initialValue).replace(NUMERIC_PATTERN, ''));
+
+    if(currentNumber < MIN_VALUE_ONE_THOUSAND) {
+      this.el.nativeElement.value = Amount.OneThousand;
     }
 
-
-    const formattedValue = Math.min(Math.max(minValue, number), maxValue).toLocaleString('en-US', { minimumFractionDigits: 0 });
-this.el.nativeElement.value =  `$${formattedValue}`;
-
+    if (initialValue !== this.el.nativeElement.value) {
+      event.stopPropagation();
+    }
   }
 }

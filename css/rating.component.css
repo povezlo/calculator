@@ -1,0 +1,15 @@
+section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #FFA900FF;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+section h3 {
+  margin-right: 10px;
+}

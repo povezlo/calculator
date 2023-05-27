@@ -1,0 +1,11 @@
+:host-context(.form-field_error) input {
+  border: 1px solid red;
+}
+
+.app-input {
+  padding: 16px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #4A5653;
+}
