@@ -1,0 +1,55 @@
+<div class="calculator">
+  <div class="calculator__inputs">
+        <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="calculateProfit()">
+
+          <app-form-field label="Amount?" [required]="true" [control]="form.get('amount')">
+            <app-input formControlName="amount"></app-input>
+          </app-form-field>
+
+          <!-- <app-form-field label="Currency" [required]="true" [control]="form.get('currency')"
+            [patternError]="regexErrors.numbers">
+            <app-input formControlName="currency"></app-input>
+          </app-form-field>
+
+
+          <app-form-field label="Select" [required]="true" [control]="form.get('select')">
+            <app-select formControlName="select" [items]="items"></app-select>
+          </app-form-field>
+
+          <app-form-field label="Checkboxes" [required]="true" [control]="form.get('checkboxes')">
+            <app-checkboxes formControlName="checkboxes" [items]="items"></app-checkboxes>
+          </app-form-field> -->
+          <label class="checkbox style-e">
+  <input type="checkbox"/>
+  <div class="checkbox__checkmark"></div>
+  <div class="checkbox__body">Style E</div>
+</label>
+        </form>
+  </div>
+
+
+
+  <div class="calculator__result">
+      <div class="result__profit">
+        <h2>Profit:</h2>
+        <p>profit</p>
+      </div>
+      <div class="result__percent">
+        <h2>Percent:</h2>
+        <p>selectedAPR %</p>
+      </div>
+      <div class="result__actions">
+        <div class="result__stars"></div>
+        <button (click)="calculateProfit()">Calculate</button>
+      </div>
+      <div class="result__info">
+        <p>
+          <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis facere perferendis sit.
+          Accusamus fugiat iure ab dolorum ut officiis, neque, nihil natus dolor velit culpa, et adipisci.
+          Ab, beatae ad? Dignissimos ratione incidunt commodi, nulla ipsa adipisci debitis quidem dolorem
+          blanditiis est nobis itaque esse dicta minima animi temporibus facilis consequuntur? Saepe assumenda
+          aut nisi quidem, voluptatum illo doloribus ipsa.</small>
+        </p>
+      </div>
+  </div>
+</div>

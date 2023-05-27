@@ -1,0 +1,7 @@
+<section>
+  <h3>{{rating}}</h3>
+    <div class="icon" *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i">
+      {{rating | showStar: i}}
+    </div>
+</section>
+
