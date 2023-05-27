@@ -1,13 +1,12 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
-import { Amount } from '../interfaces';
 
 @Directive({
-  selector: '[appDigitsOnly]'
+  selector: '[appDigitsLimit]'
 })
-export class DigitsOnlyDirective {
+export class DigitsLimitDirective {
   constructor(private el: ElementRef) {}
 
-  @HostListener('change', ['$event']) onInput(event: any) {
+  @HostListener('input', ['$event']) onInput(event: any) {
     const initialValue = this.el.nativeElement.value;
     const cleanValue = initialValue.replace(/[^0-9,.]/g, '');
     const lastChar = cleanValue.charAt(cleanValue.length - 1);

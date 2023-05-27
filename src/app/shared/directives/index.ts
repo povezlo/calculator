@@ -1,1 +1,1 @@
-export * from "./digits-only.directive";
+export * from "./digits-limit.directive";
