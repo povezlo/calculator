@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RatingComponent } from './rating.component';
-import { ShowRatingStarPipe } from './show-rating-stars.pipe';
 
 @NgModule({
-  declarations: [RatingComponent, ShowRatingStarPipe],
+  declarations: [RatingComponent],
   imports: [CommonModule],
   exports: [RatingComponent],
 })

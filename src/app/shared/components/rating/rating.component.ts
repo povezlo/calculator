@@ -1,21 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-
-const MAX_STAR_COUNT = 5;
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-rating',
+  selector: 'custom-rating',
   templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./rating.component.scss']
 })
-export class RatingComponent implements OnInit {
-  @Input() rating: number | undefined = 0;
-  @Input() starCount = MAX_STAR_COUNT;
-  ratingArr: number[] = [];
-
-  ngOnInit() {
-    for (let index = 0; index < MAX_STAR_COUNT; index++) {
-      this.ratingArr.push(index);
-    }
-  }
+export class RatingComponent {
 }

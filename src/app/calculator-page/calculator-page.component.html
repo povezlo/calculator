@@ -12,8 +12,8 @@
           </app-form-field> -->
 
 
-          <app-form-field label="Period?" [control]="form.get('select')">
-            <custom-select formControlName="periods" selectedItem="12" [items]="periods"></custom-select>
+          <app-form-field label="Period?" [control]="form.get('period')">
+            <custom-select formControlName="period" selectedItem="12" [items]="periods"></custom-select>
           </app-form-field>
 
           <app-form-field [control]="form.get('checkbox')">
@@ -23,17 +23,18 @@
   </div>
 
   <div class="calculator__result">
-      <div class="result__profit">
-        <h2>Profit:</h2>
-        <p>{{result}}</p>
+      <div class="result__profit resut__label">
+        <span>Profit:</span>
+        <p>{{amount}}</p>
       </div>
-      <div class="result__percent">
-        <h2>Percent:</h2>
-        <p>selectedAPR %</p>
+      <div class="result__percent resut__label">
+        <span>Percent:</span>
+        <p>{{period}} %</p>
+        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit</small>
       </div>
       <div class="result__actions">
-        <div class="result__stars"></div>
-        <button (click)="calculateProfit()">Calculate</button>
+          <custom-rating></custom-rating>
+          <custom-button (click)="calculateProfit()">Calculate</custom-button>
       </div>
       <div class="result__info">
         <p>

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ButtonType } from '../../interfaces';
 
 @Component({
-  selector: 'easy-library-button',
+  selector: 'custom-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
