@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputComponent } from './input.component';
 import { FormatCurrencyPipe } from 'src/app/shared/pipes';
 import { DigitsLimitDirective } from 'src/app/shared/directives';
+import { AmountInputComponent } from './amount-input.component';
 
 @NgModule({
   declarations: [
-    InputComponent,
+    AmountInputComponent,
     FormatCurrencyPipe,
     DigitsLimitDirective
   ],
   imports: [CommonModule],
   exports: [
-    InputComponent,
+    AmountInputComponent,
     FormatCurrencyPipe,
     DigitsLimitDirective
   ],
 })
-export class InputModule {}
+export class AmountInputModule {}

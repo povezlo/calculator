@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { regex, regexErrors } from '../shared';
+import { Amount, regex, regexErrors } from '../shared';
 
 @Component({
   selector: 'app-calculator-page',
   templateUrl: './calculator-page.component.html',
-  styleUrls: ['./calculator-page.component.scss']
+  styleUrls: ['./calculator-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalculatorPageComponent implements OnInit {
   form!: FormGroup;
   regexErrors = regexErrors;
-  items = [];
+  result = Amount.Zero;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       amount: [null, {
-        updateOn: 'blur',
+        updateOn: 'change',
+
         validators: [
           Validators.required
         ]
@@ -35,15 +37,19 @@ export class CalculatorPageComponent implements OnInit {
           Validators.required
         ]
       }],
-      checkboxes: [null, {
+      checkbox: [null, {
         updateOn: 'change', validators: [
           Validators.required
         ]
       }],
     });
+
+    this.form.valueChanges.subscribe(value => {
+      this.result = value.amount;
+      console.log('form', value);
+    });
   }
 
   calculateProfit() {
-
   }
 }

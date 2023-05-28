@@ -1,21 +1,22 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Amount } from 'src/app/shared/interfaces';
 import { transformCurrency, transformUSDtoNumber } from 'src/app/shared/utils';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'amount-input',
+  templateUrl: './amount-input.component.html',
+  styleUrls: ['./amount-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => AmountInputComponent),
       multi: true,
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor {
+export class AmountInputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Output() changed = new EventEmitter<string>();
   investmentAmount = '';
@@ -58,6 +59,8 @@ export class InputComponent implements ControlValueAccessor {
     const formatCurrency = transformCurrency(clearNumber, { maxValue: true });;
 
     this.investmentAmount = `$${formatCurrency}`;
+    this.propagateChange(this.investmentAmount);
+
   }
 
   increaseAmount() {
@@ -68,5 +71,6 @@ export class InputComponent implements ControlValueAccessor {
     const formatCurrency = transformCurrency(clearNumber, { maxValue: false });;
 
     this.investmentAmount = `$${formatCurrency}`;
+    this.propagateChange(this.investmentAmount);
   }
 }

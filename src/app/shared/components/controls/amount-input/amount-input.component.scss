@@ -1,0 +1,52 @@
+:host-context(.form-field_error) {
+  input {
+    border: 1px solid red;
+  }
+}
+
+
+.calculator {
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__input {
+    width: 547px;
+    height: 50px;
+    padding: 16px;
+    padding-left: 22px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: #4A5653;
+    background: #F4F5F6;
+    border-style: none;
+  }
+
+    &__button-wrapper {
+      position: absolute;
+      top: 16px;
+      left: 115px;
+      width: 43px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__button {
+      width: 19px;
+      height: 19px;
+      line-height: 19px;
+      color: white;
+      border-radius: 50%;
+
+      &.btn-minus {
+        background: #C75D30;
+      }
+
+      &.btn-plus {
+        background: #539985;
+      }
+    }
+}
+
+

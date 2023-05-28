@@ -3,7 +3,7 @@
         <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="calculateProfit()">
 
           <app-form-field label="Amount?" [required]="true" [control]="form.get('amount')">
-            <app-input formControlName="amount"></app-input>
+            <amount-input formControlName="amount"></amount-input>
           </app-form-field>
 
           <!-- <app-form-field label="Currency" [required]="true" [control]="form.get('currency')"
@@ -14,25 +14,18 @@
 
           <app-form-field label="Select" [required]="true" [control]="form.get('select')">
             <app-select formControlName="select" [items]="items"></app-select>
-          </app-form-field>
-
-          <app-form-field label="Checkboxes" [required]="true" [control]="form.get('checkboxes')">
-            <app-checkboxes formControlName="checkboxes" [items]="items"></app-checkboxes>
           </app-form-field> -->
-          <label class="checkbox style-e">
-  <input type="checkbox"/>
-  <div class="checkbox__checkmark"></div>
-  <div class="checkbox__body">Style E</div>
-</label>
+
+          <app-form-field [required]="false" [control]="form.get('checkbox')">
+            <custom-checkbox formControlName="checkbox"></custom-checkbox>
+          </app-form-field>
         </form>
   </div>
-
-
 
   <div class="calculator__result">
       <div class="result__profit">
         <h2>Profit:</h2>
-        <p>profit</p>
+        <p>{{result}}</p>
       </div>
       <div class="result__percent">
         <h2>Percent:</h2>
