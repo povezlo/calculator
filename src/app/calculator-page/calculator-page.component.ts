@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Amount, ICalculateDate, ICurrency, regex, regexErrors } from '../shared';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Amount,
+  ICalculateDate,
+  ICurrency,
+  MAX_VALUE_ONE_MILLION,
+  ONE_HUNDRED_PERCENT,
+  transformUSDtoNumber
+  } from '../shared';
 
 @Component({
   selector: 'app-calculator-page',
@@ -22,9 +29,8 @@ export class CalculatorPageComponent implements OnInit {
   ];
   calculateData: ICalculateDate | null = null;
 
-  regexErrors = regexErrors;
-  amount: string = Amount.OneThousand;
-  period = '0';
+  profit: string = Amount.OneThousand;
+  percent = 0;
 
   constructor(private fb: FormBuilder) { }
 
@@ -33,13 +39,8 @@ export class CalculatorPageComponent implements OnInit {
       amount: [Amount.OneThousand, {
         updateOn: 'change',
       }],
-      currency: [null, {
-        updateOn: 'blur',
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern(regex.numbers)
-        ]
+      currency: [this.currencyList[0], {
+        updateOn: 'change',
       }],
       period: ['12', {
         updateOn: 'change'
@@ -50,13 +51,23 @@ export class CalculatorPageComponent implements OnInit {
     });
 
     this.form.valueChanges.subscribe((calculateData: ICalculateDate) => {
-      this.amount = calculateData.amount;
-      this.period = calculateData.period;
+
       this.calculateData = calculateData;
-      console.log('form', calculateData);
+      this.calculateProfit();
     });
   }
 
   calculateProfit(): void {
+    if(!this.calculateData) {
+      return;
+    }
+    const { amount, period, currency } = this.calculateData;
+
+    let filteredAmount = transformUSDtoNumber(amount);
+
+    const result = filteredAmount * parseInt(currency.apr) / ONE_HUNDRED_PERCENT * parseInt(period) / 12;
+    const formattedValue = Math.min(result, MAX_VALUE_ONE_MILLION).toLocaleString('en-US', { minimumFractionDigits: 0 });
+    this.profit = `$${formattedValue}`;
+    this.percent = parseInt(currency.apr);
   }
 }

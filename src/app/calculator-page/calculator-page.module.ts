@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalculatorPageComponent } from './calculator-page.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AmountInputModule, ButtonModule, CheckboxModule, FormFieldModule, RatingModule, SelectModule } from '../shared';
+import { AmountInputModule, AutocompleteModule, ButtonModule, CheckboxModule, FormFieldModule, RatingModule, SelectModule } from '../shared';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
@@ -25,7 +25,8 @@ const routes: Routes = [
     SelectModule,
     CheckboxModule,
     ButtonModule,
-    RatingModule
+    RatingModule,
+    AutocompleteModule
   ],
   exports: [CalculatorPageComponent]
 })

@@ -6,10 +6,9 @@
             <amount-input formControlName="amount"></amount-input>
           </app-form-field>
 
-          <!-- <app-form-field label="Currency" [required]="true" [control]="form.get('currency')"
-            [patternError]="regexErrors.numbers">
-            <app-input formControlName="currency"></app-input>
-          </app-form-field> -->
+          <app-form-field label="Currency" [control]="form.get('currency')">
+            <app-autocomplete formControlName="currency" [items]="currencyList"></app-autocomplete>
+          </app-form-field>
 
 
           <app-form-field label="Period?" [control]="form.get('period')">
@@ -25,11 +24,11 @@
   <div class="calculator__result">
       <div class="result__profit resut__label">
         <span>Profit:</span>
-        <p>{{amount}}</p>
+        <p>{{profit}}</p>
       </div>
       <div class="result__percent resut__label">
         <span>Percent:</span>
-        <p>{{period}} %</p>
+        <p>{{percent}} %</p>
         <small>Lorem ipsum dolor sit amet consectetur adipisicing elit</small>
       </div>
       <div class="result__actions">

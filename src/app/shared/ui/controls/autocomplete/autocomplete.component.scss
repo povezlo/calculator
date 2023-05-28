@@ -1,0 +1,36 @@
+.ng-autocomplete {
+  width: 100%;
+
+  ::ng-deep .autocomplete-container {
+    box-shadow: none;
+
+    .input-container input {
+        width: 547px;
+        height: 50px;
+        padding: 16px;
+        padding-left: 22px;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 20px;
+        color: #4A5653;
+        background: #F4F5F6;
+      }
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+  }
+  .apr-icon {
+    width: 59px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    background: #77D8C2;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+  }
+}

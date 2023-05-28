@@ -68,7 +68,7 @@ export class AmountInputComponent implements ControlValueAccessor {
 
     clearNumber = clearNumber + 1000;
 
-    const formatCurrency = transformCurrency(clearNumber, { maxValue: false });;
+    const formatCurrency = transformCurrency(clearNumber, { maxValue: false });
 
     this.investmentAmount = `$${formatCurrency}`;
     this.propagateChange(this.investmentAmount);
