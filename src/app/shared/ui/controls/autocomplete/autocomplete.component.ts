@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl } from '@angular/forms';
 
-import { Subject, Observable } from 'rxjs';
-import { takeUntil, distinctUntilChanged, startWith, map, filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { ICurrency, Value } from 'src/app/shared/interfaces';
 
 @Component({
@@ -17,7 +16,7 @@ import { ICurrency, Value } from 'src/app/shared/interfaces';
         }
     ]
 })
-export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class AutocompleteComponent implements OnInit, ControlValueAccessor {
     @Input() items: ICurrency[] = [];
     @Output() changed = new EventEmitter<ICurrency>();
 
@@ -26,38 +25,10 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
     keyword = 'name';
     placeholder = '';
 
-    private destroy = new Subject<void>();
-
     constructor() { }
 
     ngOnInit(): void {
         this.placeholder = `${this.items[0].name}`;
-
-        this.options$ = this.formControl.valueChanges.pipe(
-            startWith(''),
-            filter(value => typeof value === 'string' || typeof value === 'object'),
-            map(value => typeof value === 'string' ? value : value.label),
-            map(label => label ? this.filter(label) : this.items.slice())
-        );
-
-        this.formControl.valueChanges.pipe(
-            takeUntil(this.destroy),
-            distinctUntilChanged()
-        ).subscribe(item => {
-            const value = typeof item === 'object' ? item.name : null;
-            this.propagateChange(value);
-            this.changed.emit(value);
-        });
-    }
-
-    ngOnDestroy(): void {
-        this.destroy.next();
-        this.destroy.complete();
-    }
-
-    private filter(value: string): ICurrency[] {
-        const filterValue = value.toLowerCase();
-        return this.items.filter(item => item.name.toLowerCase().includes(filterValue));
     }
 
     private propagateChange: (fn: any) => void = (fn: any) => {};
@@ -84,16 +55,13 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
         }
     }
 
-    displayFn(item?: ICurrency): string | undefined {
-        return item ? item.name : undefined;
-    }
-
     onBlur(): void {
         this.propagateTouched();
     }
 
 
   selectEvent(item: ICurrency): void {
+        console.log('bbvnvn');
         this.propagateChange(item);
         this.changed.emit(item);
   }
