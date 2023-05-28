@@ -1,7 +1,7 @@
 export interface ICalculateDate {
   amount: string;
   checkbox: boolean;
-  currency: ICurrency;
+  currency: ICurrency[];
   period: string;
 }
 
