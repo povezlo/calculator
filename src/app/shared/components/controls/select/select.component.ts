@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { ControlItem, Value } from 'src/app/shared/interfaces';
+import { Value } from 'src/app/shared/interfaces';
 
 @Component({
-    selector: 'app-select',
+    selector: 'custom-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,8 +16,8 @@ import { ControlItem, Value } from 'src/app/shared/interfaces';
     ]
 })
 export class SelectComponent implements OnInit, ControlValueAccessor {
-    @Input() items: ControlItem[] = [];
-    @Input() placeholder: string | null = null;
+    @Input() items: string[] = [];
+    @Input() selectedItem = 'Select';
     @Output() changed = new EventEmitter<Value>();
 
     value: Value | null = null;

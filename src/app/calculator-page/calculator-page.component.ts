@@ -10,6 +10,9 @@ import { Amount, regex, regexErrors } from '../shared';
 })
 export class CalculatorPageComponent implements OnInit {
   form!: FormGroup;
+
+  periods: string[] = ['1', '3', '6', '9', '12', '24'];
+
   regexErrors = regexErrors;
   result = Amount.Zero;
 
@@ -19,10 +22,6 @@ export class CalculatorPageComponent implements OnInit {
     this.form = this.fb.group({
       amount: [null, {
         updateOn: 'change',
-
-        validators: [
-          Validators.required
-        ]
       }],
       currency: [null, {
         updateOn: 'blur',
@@ -32,15 +31,11 @@ export class CalculatorPageComponent implements OnInit {
           Validators.pattern(regex.numbers)
         ]
       }],
-      select: [null, {
-        updateOn: 'change', validators: [
-          Validators.required
-        ]
+      periods: [null, {
+        updateOn: 'change'
       }],
       checkbox: [null, {
-        updateOn: 'change', validators: [
-          Validators.required
-        ]
+        updateOn: 'change'
       }],
     });
 

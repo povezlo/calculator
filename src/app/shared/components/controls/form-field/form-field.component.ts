@@ -9,7 +9,7 @@ import { AbstractControl } from '@angular/forms';
 })
 export class FormFieldComponent {
   @Input() label: string = '';
-  @Input() required = true;
+  @Input() required = false;
   @Input() control: AbstractControl<any, any> | null = null;
   @Input() patternError!: string;
 

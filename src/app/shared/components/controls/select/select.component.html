@@ -1,7 +1,10 @@
-<div class="select app-input" [class.select_disabled]="isDisabled">
-    <select [value]="value" [disabled]="isDisabled" (selectionChange)="onChanged($event)" (blur)="onBlur()">
-        <option *ngFor="let item of items" [value]="item.value">
-            {{item.label}}
+<div class="calculator__input-wrapper">
+  <div class="calculator__input">
+    <select class="calculator__select" [(ngModel)]="selectedItem" (change)="onChanged($event)">
+        <option *ngFor="let item of items" [value]="item">
+            {{item}}
         </option>
     </select>
+  </div>
 </div>
+

@@ -2,21 +2,21 @@
   <div class="calculator__inputs">
         <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="calculateProfit()">
 
-          <app-form-field label="Amount?" [required]="true" [control]="form.get('amount')">
+          <app-form-field label="Amount?" [control]="form.get('amount')">
             <amount-input formControlName="amount"></amount-input>
           </app-form-field>
 
           <!-- <app-form-field label="Currency" [required]="true" [control]="form.get('currency')"
             [patternError]="regexErrors.numbers">
             <app-input formControlName="currency"></app-input>
-          </app-form-field>
-
-
-          <app-form-field label="Select" [required]="true" [control]="form.get('select')">
-            <app-select formControlName="select" [items]="items"></app-select>
           </app-form-field> -->
 
-          <app-form-field [required]="false" [control]="form.get('checkbox')">
+
+          <app-form-field label="Period?" [control]="form.get('select')">
+            <custom-select formControlName="periods" selectedItem="12" [items]="periods"></custom-select>
+          </app-form-field>
+
+          <app-form-field [control]="form.get('checkbox')">
             <custom-checkbox formControlName="checkbox"></custom-checkbox>
           </app-form-field>
         </form>
