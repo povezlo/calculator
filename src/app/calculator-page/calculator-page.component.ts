@@ -75,16 +75,11 @@ export class CalculatorPageComponent implements OnInit {
     const {amount, period, currency} = this.calculateData;
 
     let filteredAmount = transformUSDtoNumber(amount);
+    const apr = parseInt(currency.apr);
 
-    const result =
-      (((filteredAmount * parseInt(currency.apr)) / ONE_HUNDRED_PERCENT) *
-        parseInt(period)) /
-      12;
-    const formattedValue = Math.min(
-      result,
-      MAX_VALUE_ONE_MILLION
-    ).toLocaleString('en-US', {minimumFractionDigits: 0});
+    const result = (((filteredAmount * apr) / ONE_HUNDRED_PERCENT) * parseInt(period)) / 12;
+    const formattedValue = Math.min(result, MAX_VALUE_ONE_MILLION).toLocaleString('en-US', {minimumFractionDigits: 0});
     this.profit = `$${formattedValue}`;
-    this.percent = parseInt(currency.apr);
+    this.percent = apr;
   }
 }

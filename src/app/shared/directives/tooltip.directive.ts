@@ -39,7 +39,6 @@ export class TooltipDirective {
   }
 
   private hideTooltip() {
-    // Удаление элемента подсказки из DOM
     if (this.tooltipElement) {
       this.renderer.removeChild(
         this.elementRef.nativeElement,
