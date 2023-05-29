@@ -53,6 +53,7 @@ export class CalculatorPageComponent implements OnInit {
     this.form.valueChanges.subscribe((calculateData: ICalculateDate) => {
 
       this.calculateData = calculateData;
+      console.log(calculateData);
       this.calculateProfit();
     });
   }

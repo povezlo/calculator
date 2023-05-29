@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormControl } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
 
-import { Observable } from 'rxjs';
-import { ICurrency, Value } from 'src/app/shared/interfaces';
+import { ICurrency } from 'src/app/shared/interfaces';
 
 @Component({
     selector: 'app-autocomplete',
@@ -10,58 +10,63 @@ import { ICurrency, Value } from 'src/app/shared/interfaces';
     styleUrls: ['./autocomplete.component.scss'],
     providers: [
         {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => AutocompleteComponent),
-            multi: true
+          provide: NG_VALUE_ACCESSOR,
+          useExisting: forwardRef(() => AutocompleteComponent),
+          multi: true
         }
     ]
 })
 export class AutocompleteComponent implements OnInit, ControlValueAccessor {
-    @Input() items: ICurrency[] = [];
-    @Output() changed = new EventEmitter<ICurrency>();
+  @Input() items: ICurrency[] = [];
+  @Output() changed = new EventEmitter<ICurrency>();
 
-    formControl = new FormControl();
-    options$: Observable<ICurrency[]> | null = null;
-    keyword = 'name';
-    placeholder = '';
+  filteredOptions: ICurrency[] = [];
+  optionsSource$ = new Subject<ICurrency[]>();
+  options$: Observable<ICurrency[]> | null = null;
 
-    constructor() { }
+  isOpenSelect: boolean = false;
+  currency: ICurrency | null = null;
 
-    ngOnInit(): void {
-        this.placeholder = `${this.items[0].name}`;
-    }
+  private propagateChange: any = () => { };
+  private propagateTouched: any = () => { };
 
-    private propagateChange: (fn: any) => void = (fn: any) => {};
-    private propagateTouched: () => void = () => {};
+  constructor() {
+    this.options$ = this.optionsSource$.asObservable();
+  }
 
-    writeValue(value: Value): void {
-        const selectedOption = this.items.find(item => item.name === value);
-        this.formControl.setValue(selectedOption);
-    }
+  ngOnInit(): void {
+      this.optionsSource$.next(this.items);
+  }
 
-    registerOnChange(fn: any): void {
-        this.propagateChange = fn;
-    }
+  writeValue(currency: ICurrency): void {
+      this.currency = currency;
+  }
 
-    registerOnTouched(fn: any): void {
-        this.propagateTouched = fn;
-    }
+  registerOnChange(fn: any): void {
+      this.propagateChange = fn;
+  }
 
-    setDisabledState(isDisabled: boolean): void {
-        if (isDisabled) {
-            this.formControl.disable();
-        } else {
-            this.formControl.enable();
-        }
-    }
+  registerOnTouched(fn: any): void {
+      this.propagateTouched = fn;
+  }
 
-    onBlur(): void {
-        this.propagateTouched();
-    }
+  openSelect(): void {
+      this.optionsSource$.next(this.items);
+      this.isOpenSelect = true;
+  }
 
+  selectOption(currency: ICurrency): void {
+      this.currency = currency;
+      this.propagateChange(currency);
+      this.changed.emit(currency);
+      this.isOpenSelect = false;
+  }
 
-  selectEvent(item: ICurrency): void {
-        this.propagateChange(item);
-        this.changed.emit(item);
+  filterInput(eventInput: Event): void {
+    const { value } = (<HTMLInputElement>eventInput.target);
+    this.isOpenSelect = true;
+
+    const filteredOptions = this.items.filter((option: ICurrency) => option.name.toLowerCase().includes(value.toLowerCase()));
+    this.optionsSource$.next(filteredOptions);
   }
 }

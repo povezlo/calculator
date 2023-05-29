@@ -1,22 +1,17 @@
-<div class="ng-autocomplete">
-  <ng-autocomplete
-    [data]="items"
-    [searchKeyword]="keyword"
-    [placeholder]="placeholder"
-    [itemTemplate]="itemTemplate"
-    [notFoundTemplate]="notFoundTemplate"
-    (selected)='selectEvent($event)'
-  >
-  </ng-autocomplete>
+<div class="calculator__input-wrapper" (click)="openSelect()">
+  <input type="text" class="calculator__input" [value]="currency?.name ?? ''" (input)="filterInput($event)">
+      <div class="input-append">
+        <div class="apr-icon">APR {{currency?.apr}}</div>
+      </div>
 
-  <ng-template #itemTemplate let-item>
-    <div class="option">
-      <a [innerHTML]="item.name"></a>
-      <div class="apr-icon">APR {{item.apr}}</div>
-    </div>
-  </ng-template>
-
-  <ng-template #notFoundTemplate let-notFound>
-    <div [innerHTML]="notFound"></div>
-  </ng-template>
+  <ul class="calculator__select" *ngIf="isOpenSelect">
+    <ng-container *ngIf="options$ | async as options">
+      <li *ngFor="let item of options" (click)="selectOption(item)">
+        <div class="option">
+          <a [innerHTML]="item.name"></a>
+          <div class="apr-icon">APR {{item.apr}}</div>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
 </div>
