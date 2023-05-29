@@ -8,6 +8,6 @@ import {AbstractControl} from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldComponent {
-  @Input() label: string = '';
+  @Input() label = '';
   @Input() control: AbstractControl<any, any> | null = null;
 }

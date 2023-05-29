@@ -7,7 +7,7 @@
       (ngSubmit)="calculateProfit()"
     >
       <app-form-field label="Amount?" [control]="form.get('amount')">
-        <amount-input formControlName="amount"></amount-input>
+        <app-amount-input formControlName="amount"></app-amount-input>
       </app-form-field>
 
       <app-form-field label="Currency?" [control]="form.get('currency')">
@@ -18,16 +18,16 @@
       </app-form-field>
 
       <app-form-field label="Period?" [control]="form.get('period')">
-        <custom-select
+        <app-custom-select
           formControlName="period"
           selectedItem="12"
           [items]="periods"
           [isDisabled]="true"
-        ></custom-select>
+        ></app-custom-select>
       </app-form-field>
 
       <app-form-field [control]="form.get('checkbox')">
-        <custom-checkbox formControlName="checkbox"></custom-checkbox>
+        <app-custom-checkbox formControlName="checkbox"></app-custom-checkbox>
       </app-form-field>
     </form>
   </div>
@@ -43,8 +43,8 @@
       <small>Lorem ipsum dolor sit amet consectetur adipisicing elit</small>
     </div>
     <div class="result__actions">
-      <custom-rating></custom-rating>
-      <custom-button (click)="calculateProfit()">Calculate</custom-button>
+      <app-custom-rating></app-custom-rating>
+      <app-custom-button (click)="calculateProfit()">Calculate</app-custom-button>
     </div>
     <div class="result__info">
       <p>

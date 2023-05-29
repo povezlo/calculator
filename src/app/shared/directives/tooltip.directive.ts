@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[tooltip]',
+  selector: '[appTooltip]',
 })
 export class TooltipDirective {
-  @Input('tooltip') tooltipText = '';
+  @Input('appTooltip') tooltipText = '';
 
   private tooltipElement: HTMLElement | null = null;
 

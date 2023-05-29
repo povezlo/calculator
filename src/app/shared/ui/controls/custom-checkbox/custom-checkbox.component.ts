@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   EventEmitter,
@@ -10,7 +9,7 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {Value} from 'src/app/shared/interfaces';
 
 @Component({
-  selector: 'custom-checkbox',
+  selector: 'app-custom-checkbox',
   templateUrl: './custom-checkbox.component.html',
   styleUrls: ['./custom-checkbox.component.scss'],
   providers: [
@@ -21,16 +20,12 @@ import {Value} from 'src/app/shared/interfaces';
     },
   ],
 })
-export class CheckboxComponent implements OnInit, ControlValueAccessor {
+export class CheckboxComponent implements ControlValueAccessor {
   @Input() label = 'Lorem ipsum';
   @Output() changed = new EventEmitter<boolean>();
 
   value: Value[] = [];
-  isDisabled: boolean = false;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  isDisabled = false;
 
   private propagateChange: any = () => {};
 

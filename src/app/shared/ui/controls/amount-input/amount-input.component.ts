@@ -11,7 +11,7 @@ import {Amount} from 'src/app/shared/interfaces';
 import {transformCurrency, transformUSDtoNumber} from 'src/app/shared/utils';
 
 @Component({
-  selector: 'amount-input',
+  selector: 'app-amount-input',
   templateUrl: './amount-input.component.html',
   styleUrls: ['./amount-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +33,7 @@ export class AmountInputComponent implements ControlValueAccessor {
   private propagateTouched: () => void = () => {};
 
   writeValue(value: string): void {
-    this.investmentAmount = value ?? Amount.OneThousand;
+    this.investmentAmount = value;
   }
 
   registerOnChange(fn: any): void {
@@ -56,6 +56,11 @@ export class AmountInputComponent implements ControlValueAccessor {
 
   onBlur(): void {
     this.propagateTouched();
+  }
+
+  resetCurrency(): void {
+    this.investmentAmount = Amount.OneThousand;
+    this.propagateChange(this.investmentAmount);
   }
 
   decreaseAmount() {

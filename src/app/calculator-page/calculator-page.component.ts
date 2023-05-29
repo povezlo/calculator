@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {
   Amount,
+  DEFAULT_PERIOD_TWELVE_MONTH,
   ICalculateDate,
   ICurrency,
   MAX_VALUE_ONE_MILLION,
@@ -35,6 +36,8 @@ export class CalculatorPageComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.percent = parseInt(this.currencyList[0].apr);
+
     this.form = this.fb.group({
       amount: [
         Amount.OneThousand,
@@ -49,7 +52,7 @@ export class CalculatorPageComponent implements OnInit {
         },
       ],
       period: [
-        '12',
+        DEFAULT_PERIOD_TWELVE_MONTH,
         {
           updateOn: 'change',
         },
@@ -74,10 +77,10 @@ export class CalculatorPageComponent implements OnInit {
     }
     const {amount, period, currency} = this.calculateData;
 
-    let filteredAmount = transformUSDtoNumber(amount);
+    const filteredAmount = transformUSDtoNumber(amount);
     const apr = parseInt(currency.apr);
 
-    const result = (((filteredAmount * apr) / ONE_HUNDRED_PERCENT) * parseInt(period)) / 12;
+    const result = (((filteredAmount * apr) / ONE_HUNDRED_PERCENT) * parseInt(period)) / DEFAULT_PERIOD_TWELVE_MONTH;
     const formattedValue = Math.min(result, MAX_VALUE_ONE_MILLION).toLocaleString('en-US', {minimumFractionDigits: 0});
     this.profit = `$${formattedValue}`;
     this.percent = apr;

@@ -1,5 +1,5 @@
 import {CurrencyPipe} from '@angular/common';
-import {Directive, ElementRef, HostListener} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, HostListener, Output} from '@angular/core';
 import {
   Amount,
   MIN_VALUE_ONE_THOUSAND,
@@ -13,6 +13,8 @@ import {transformUSDtoNumber, transformCurrency} from '../utils';
   providers: [CurrencyPipe],
 })
 export class DigitsLimitDirective {
+  @Output() setDefaultValue: EventEmitter<string> = new EventEmitter();
+
   constructor(private el: ElementRef, private currencyPipe: CurrencyPipe) {}
 
   @HostListener('input', ['$event']) onInput(event: Event) {
@@ -39,6 +41,7 @@ export class DigitsLimitDirective {
 
     if (currentNumber < MIN_VALUE_ONE_THOUSAND) {
       this.el.nativeElement.value = Amount.OneThousand;
+      this.setDefaultValue.emit(this.el.nativeElement.value);
     }
 
     if (initialValue !== this.el.nativeElement.value) {

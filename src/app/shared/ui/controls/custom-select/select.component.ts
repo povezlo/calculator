@@ -11,7 +11,7 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {Value} from 'src/app/shared/interfaces';
 
 @Component({
-  selector: 'custom-select',
+  selector: 'app-custom-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +30,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   @Output() changed = new EventEmitter<Value>();
 
   value: Value | null = null;
-  isOpenSelect: boolean = false;
+  isOpenSelect = false;
   isBlocked = false;
 
   constructor() {}
