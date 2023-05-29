@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, forwardRef, ChangeDetectionStrategy } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Value } from 'src/app/shared/interfaces';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  forwardRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
+import {Value} from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'custom-select',
@@ -8,12 +16,12 @@ import { Value } from 'src/app/shared/interfaces';
   styleUrls: ['./select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-      {
-          provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => SelectComponent),
-          multi: true
-      }
-  ]
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectComponent),
+      multi: true,
+    },
+  ],
 })
 export class SelectComponent implements OnInit, ControlValueAccessor {
   @Input() items: string[] = [];
@@ -25,39 +33,39 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   isOpenSelect: boolean = false;
   isBlocked = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.isBlocked = !!this.isDisabled;
   }
 
-  private propagateChange: any = () => { };
-  private propagateTouched: any = () => { };
+  private propagateChange: any = () => {};
+  private propagateTouched: any = () => {};
 
   writeValue(value: Value): void {
-      this.value = value;
+    this.value = value;
   }
 
   registerOnChange(fn: any): void {
-      this.propagateChange = fn;
+    this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-      this.propagateTouched = fn;
+    this.propagateTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
-      this.isDisabled = isDisabled;
+    this.isDisabled = isDisabled;
   }
 
   openSelect(): void {
-      this.isOpenSelect = !this.isOpenSelect;
+    this.isOpenSelect = !this.isOpenSelect;
   }
 
   selectOption(event: Event): void {
-      const value = (event.target as HTMLInputElement).value;
-      this.value = value;
-      this.propagateChange(value);
-      this.changed.emit(value);
+    const value = (event.target as HTMLInputElement).value;
+    this.value = value;
+    this.propagateChange(value);
+    this.changed.emit(value);
   }
 }

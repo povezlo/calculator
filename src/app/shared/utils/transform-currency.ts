@@ -1,6 +1,12 @@
-import { MAX_VALUE_ONE_MILLION, MIN_VALUE_ONE_THOUSAND } from '../interfaces/constants';
+import {
+  MAX_VALUE_ONE_MILLION,
+  MIN_VALUE_ONE_THOUSAND,
+} from '../interfaces/constants';
 
-export const transformCurrency = (num: number, limit: { maxValue: boolean }): string => {
+export const transformCurrency = (
+  num: number,
+  limit: {maxValue: boolean}
+): string => {
   let filteredNumber = 0;
 
   if (limit.maxValue) {
@@ -9,5 +15,5 @@ export const transformCurrency = (num: number, limit: { maxValue: boolean }): st
     filteredNumber = Math.min(MAX_VALUE_ONE_MILLION, num);
   }
 
-  return filteredNumber.toLocaleString('en-US', { minimumFractionDigits: 0 });
-}
+  return filteredNumber.toLocaleString('en-US', {minimumFractionDigits: 0});
+};

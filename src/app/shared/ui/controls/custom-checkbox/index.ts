@@ -1,1 +1,1 @@
-export * from "./custom-checkbox.module";
+export * from './custom-checkbox.module';

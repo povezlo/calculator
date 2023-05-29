@@ -1,2 +1,2 @@
-export * from "./digits-limit.directive";
-export * from "./tooltip.directive";
+export * from './digits-limit.directive';
+export * from './tooltip.directive';

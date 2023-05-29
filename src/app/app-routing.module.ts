@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Route, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Route, RouterModule} from '@angular/router';
 
 export const routes: Route[] = [
   {
@@ -9,7 +9,10 @@ export const routes: Route[] = [
   },
   {
     path: 'calculator',
-    loadChildren: () => import('./calculator-page/calculator-page.module').then(m => m.CalculatorPageModule),
+    loadChildren: () =>
+      import('./calculator-page/calculator-page.module').then(
+        (m) => m.CalculatorPageModule
+      ),
   },
   {
     path: '**',
@@ -19,6 +22,6 @@ export const routes: Route[] = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

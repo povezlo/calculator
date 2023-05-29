@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-form-field',
   templateUrl: './form-field.component.html',
   styleUrls: ['./form-field.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormFieldComponent {
   @Input() label: string = '';

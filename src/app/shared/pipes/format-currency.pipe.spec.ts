@@ -1,4 +1,4 @@
-import { FormatCurrencyPipe } from './format-currency.pipe';
+import {FormatCurrencyPipe} from './format-currency.pipe';
 
 describe('FormatCurrencyPipe', () => {
   it('create an instance', () => {

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CustomIconComponent } from './custom-icon.component';
-import { TooltipDirective } from '../../directives';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CustomIconComponent} from './custom-icon.component';
+import {TooltipDirective} from '../../directives';
 
 @NgModule({
   declarations: [CustomIconComponent, TooltipDirective],

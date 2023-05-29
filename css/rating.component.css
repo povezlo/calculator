@@ -3,9 +3,9 @@ section {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  color: #FFA900FF;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #ffa900ff;
   font-size: 1.2rem;
   font-weight: 600;
 }

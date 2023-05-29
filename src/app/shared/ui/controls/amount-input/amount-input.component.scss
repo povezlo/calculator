@@ -1,28 +1,26 @@
 .calculator {
-    &__button-wrapper {
-      position: absolute;
-      top: 16px;
-      left: 115px;
-      width: 43px;
-      display: flex;
-      justify-content: space-between;
+  &__button-wrapper {
+    position: absolute;
+    top: 16px;
+    left: 115px;
+    width: 43px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    color: white;
+    border-radius: 50%;
+
+    &.btn-minus {
+      background: #c75d30;
     }
 
-    &__button {
-      width: 19px;
-      height: 19px;
-      line-height: 19px;
-      color: white;
-      border-radius: 50%;
-
-      &.btn-minus {
-        background: #C75D30;
-      }
-
-      &.btn-plus {
-        background: #539985;
-      }
+    &.btn-plus {
+      background: #539985;
     }
+  }
 }
-
-

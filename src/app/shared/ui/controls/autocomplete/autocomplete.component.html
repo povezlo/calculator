@@ -6,10 +6,10 @@
     (click)="openSelect()"
     (input)="filterInput($event)"
     (focusout)="onBlur()"
-  >
+  />
 
   <div class="input-append" *ngIf="currency">
-    <div class="apr-icon">APR {{currency.apr}}</div>
+    <div class="apr-icon">APR {{ currency.apr }}</div>
   </div>
 
   <ng-container *ngIf="options$ | async as options">
@@ -17,7 +17,7 @@
       <li *ngFor="let item of options" (click)="selectOption(item)">
         <div class="option">
           <a [innerHTML]="item.name"></a>
-          <div class="apr-icon">APR {{item.apr}}</div>
+          <div class="apr-icon">APR {{ item.apr }}</div>
         </div>
       </li>
     </ul>

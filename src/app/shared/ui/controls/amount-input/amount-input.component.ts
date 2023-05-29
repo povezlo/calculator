@@ -1,7 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Amount } from 'src/app/shared/interfaces';
-import { transformCurrency, transformUSDtoNumber } from 'src/app/shared/utils';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Amount} from 'src/app/shared/interfaces';
+import {transformCurrency, transformUSDtoNumber} from 'src/app/shared/utils';
 
 @Component({
   selector: 'amount-input',
@@ -56,11 +63,10 @@ export class AmountInputComponent implements ControlValueAccessor {
 
     clearNumber = clearNumber - 1000;
 
-    const formatCurrency = transformCurrency(clearNumber, { maxValue: true });;
+    const formatCurrency = transformCurrency(clearNumber, {maxValue: true});
 
     this.investmentAmount = `$${formatCurrency}`;
     this.propagateChange(this.investmentAmount);
-
   }
 
   increaseAmount() {
@@ -68,7 +74,7 @@ export class AmountInputComponent implements ControlValueAccessor {
 
     clearNumber = clearNumber + 1000;
 
-    const formatCurrency = transformCurrency(clearNumber, { maxValue: false });
+    const formatCurrency = transformCurrency(clearNumber, {maxValue: false});
 
     this.investmentAmount = `$${formatCurrency}`;
     this.propagateChange(this.investmentAmount);

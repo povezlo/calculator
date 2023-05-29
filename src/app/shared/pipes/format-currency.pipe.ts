@@ -1,12 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'formatCurrency'
+  name: 'formatCurrency',
 })
 export class FormatCurrencyPipe implements PipeTransform {
-
   transform(currency: number): string {
-
-    return `$${currency.toLocaleString('en-US', { minimumFractionDigits: 0 })}`;
+    return `$${currency.toLocaleString('en-US', {minimumFractionDigits: 0})}`;
   }
 }

@@ -1,5 +1,4 @@
 <div class="calculator__input-wrapper">
-
   <input
     type="text"
     class="calculator__input"
@@ -9,12 +8,13 @@
     (input)="onKeyup($event)"
     (blur)="onBlur()"
     appDigitsLimit
-  >
+  />
   <div class="calculator__button-wrapper">
-      <button (click)="decreaseAmount()" class="calculator__button btn-minus">-</button>
-      <button (click)="increaseAmount()" class="calculator__button btn-plus">+</button>
+    <button (click)="decreaseAmount()" class="calculator__button btn-minus">
+      -
+    </button>
+    <button (click)="increaseAmount()" class="calculator__button btn-plus">
+      +
+    </button>
   </div>
 </div>
-
-
-

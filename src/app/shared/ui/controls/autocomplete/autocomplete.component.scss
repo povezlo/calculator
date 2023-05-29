@@ -2,18 +2,18 @@
   &__select {
     position: relative;
     width: 100%;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     z-index: 999;
 
-    &>li {
+    & > li {
       list-style: none;
       padding: 12px 24px;
       border-radius: 6px;
 
       &:hover {
-        background: #F4F5F6;
+        background: #f4f5f6;
       }
     }
 
@@ -49,7 +49,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
-  color: #FFFFFF;
-  background: #77D8C2;
+  color: #ffffff;
+  background: #77d8c2;
   border-radius: 4px;
 }

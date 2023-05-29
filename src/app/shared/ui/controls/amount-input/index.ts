@@ -1,1 +1,1 @@
-export * from "./amount-input.module";
+export * from './amount-input.module';

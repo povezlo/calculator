@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CalculatorPageComponent } from './calculator-page.component';
+import {CalculatorPageComponent} from './calculator-page.component';
 
 describe('CalculatorPageComponent', () => {
   let component: CalculatorPageComponent;
@@ -8,9 +8,8 @@ describe('CalculatorPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CalculatorPageComponent ]
-    })
-    .compileComponents();
+      declarations: [CalculatorPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CalculatorPageComponent);
     component = fixture.componentInstance;

@@ -1,48 +1,63 @@
 <div class="calculator">
   <div class="calculator__inputs">
-        <form [formGroup]="form" novalidate autocomplete="off" (ngSubmit)="calculateProfit()">
+    <form
+      [formGroup]="form"
+      novalidate
+      autocomplete="off"
+      (ngSubmit)="calculateProfit()"
+    >
+      <app-form-field label="Amount?" [control]="form.get('amount')">
+        <amount-input formControlName="amount"></amount-input>
+      </app-form-field>
 
-          <app-form-field label="Amount?" [control]="form.get('amount')">
-            <amount-input formControlName="amount"></amount-input>
-          </app-form-field>
+      <app-form-field label="Currency?" [control]="form.get('currency')">
+        <app-autocomplete
+          formControlName="currency"
+          [items]="currencyList"
+        ></app-autocomplete>
+      </app-form-field>
 
-          <app-form-field label="Currency?" [control]="form.get('currency')">
-            <app-autocomplete formControlName="currency" [items]="currencyList"></app-autocomplete>
-          </app-form-field>
+      <app-form-field label="Period?" [control]="form.get('period')">
+        <custom-select
+          formControlName="period"
+          selectedItem="12"
+          [items]="periods"
+          [isDisabled]="true"
+        ></custom-select>
+      </app-form-field>
 
-
-          <app-form-field label="Period?" [control]="form.get('period')">
-            <custom-select formControlName="period" selectedItem="12" [items]="periods" [isDisabled]="true"></custom-select>
-          </app-form-field>
-
-          <app-form-field [control]="form.get('checkbox')">
-            <custom-checkbox formControlName="checkbox"></custom-checkbox>
-          </app-form-field>
-        </form>
+      <app-form-field [control]="form.get('checkbox')">
+        <custom-checkbox formControlName="checkbox"></custom-checkbox>
+      </app-form-field>
+    </form>
   </div>
 
   <div class="calculator__result">
-      <div class="result__profit resut__label">
-        <span>Profit:</span>
-        <p>{{profit}}</p>
-      </div>
-      <div class="result__percent resut__label">
-        <span>Percent:</span>
-        <p>{{percent}} %</p>
-        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit</small>
-      </div>
-      <div class="result__actions">
-          <custom-rating></custom-rating>
-          <custom-button (click)="calculateProfit()">Calculate</custom-button>
-      </div>
-      <div class="result__info">
-        <p>
-          <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis facere perferendis sit.
-          Accusamus fugiat iure ab dolorum ut officiis, neque, nihil natus dolor velit culpa, et adipisci.
-          Ab, beatae ad? Dignissimos ratione incidunt commodi, nulla ipsa adipisci debitis quidem dolorem
-          blanditiis est nobis itaque esse dicta minima animi temporibus facilis consequuntur? Saepe assumenda
-          aut nisi quidem, voluptatum illo doloribus ipsa.</small>
-        </p>
-      </div>
+    <div class="result__profit resut__label">
+      <span>Profit:</span>
+      <p>{{ profit }}</p>
+    </div>
+    <div class="result__percent resut__label">
+      <span>Percent:</span>
+      <p>{{ percent }} %</p>
+      <small>Lorem ipsum dolor sit amet consectetur adipisicing elit</small>
+    </div>
+    <div class="result__actions">
+      <custom-rating></custom-rating>
+      <custom-button (click)="calculateProfit()">Calculate</custom-button>
+    </div>
+    <div class="result__info">
+      <p>
+        <small
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+          facere perferendis sit. Accusamus fugiat iure ab dolorum ut officiis,
+          neque, nihil natus dolor velit culpa, et adipisci. Ab, beatae ad?
+          Dignissimos ratione incidunt commodi, nulla ipsa adipisci debitis
+          quidem dolorem blanditiis est nobis itaque esse dicta minima animi
+          temporibus facilis consequuntur? Saepe assumenda aut nisi quidem,
+          voluptatum illo doloribus ipsa.</small
+        >
+      </p>
+    </div>
   </div>
 </div>

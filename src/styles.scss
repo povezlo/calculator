@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "./styles/reset.scss";
+@import './styles/reset.scss';
 
 html,
 body {
@@ -10,7 +10,7 @@ body {
   font-size: 1rem;
   line-height: 1.2rem;
   background: #ffffff;
-  color: #4A5653;
+  color: #4a5653;
 }
 
 .tooltip {
@@ -30,17 +30,17 @@ body {
   background-color: black;
   z-index: 9999;
   &::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid black;
-      position: absolute;
-      left: calc(50% - 5px);
-      top: 80px;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    }
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 80px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .calculator {
@@ -56,8 +56,8 @@ body {
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
-    color: #4A5653;
-    background: #F4F5F6;
+    color: #4a5653;
+    background: #f4f5f6;
     border-style: none;
   }
 }

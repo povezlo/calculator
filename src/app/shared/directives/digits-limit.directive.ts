@@ -1,11 +1,16 @@
-import { CurrencyPipe } from '@angular/common';
-import { Directive, ElementRef, HostListener } from '@angular/core';
-import { Amount, MIN_VALUE_ONE_THOUSAND, NON_LETTER_PATTERN, NUMERIC_PATTERN } from '../interfaces';
-import { transformUSDtoNumber, transformCurrency } from '../utils';
+import {CurrencyPipe} from '@angular/common';
+import {Directive, ElementRef, HostListener} from '@angular/core';
+import {
+  Amount,
+  MIN_VALUE_ONE_THOUSAND,
+  NON_LETTER_PATTERN,
+  NUMERIC_PATTERN,
+} from '../interfaces';
+import {transformUSDtoNumber, transformCurrency} from '../utils';
 
 @Directive({
   selector: '[appDigitsLimit]',
-  providers: [CurrencyPipe]
+  providers: [CurrencyPipe],
 })
 export class DigitsLimitDirective {
   constructor(private el: ElementRef, private currencyPipe: CurrencyPipe) {}
@@ -16,10 +21,9 @@ export class DigitsLimitDirective {
 
     const clearNumber = transformUSDtoNumber(currency);
 
-    const formatCurrency = transformCurrency(clearNumber, { maxValue: false });
+    const formatCurrency = transformCurrency(clearNumber, {maxValue: false});
 
-
-    this.el.nativeElement.value =  `$${formatCurrency}`;
+    this.el.nativeElement.value = `$${formatCurrency}`;
     this.currencyPipe.transform(parseFloat(formatCurrency));
 
     if (initialValue !== this.el.nativeElement.value) {
@@ -29,9 +33,11 @@ export class DigitsLimitDirective {
 
   @HostListener('blur', ['$event']) onBlur(event: Event) {
     const initialValue = this.el.nativeElement.value;
-    const currentNumber = parseFloat(String(initialValue).replace(NUMERIC_PATTERN, ''));
+    const currentNumber = parseFloat(
+      String(initialValue).replace(NUMERIC_PATTERN, '')
+    );
 
-    if(currentNumber < MIN_VALUE_ONE_THOUSAND) {
+    if (currentNumber < MIN_VALUE_ONE_THOUSAND) {
       this.el.nativeElement.value = Amount.OneThousand;
     }
 

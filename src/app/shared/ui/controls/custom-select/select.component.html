@@ -4,11 +4,15 @@
     class="calculator__input"
     [value]="value"
     [disabled]="isBlocked"
-    >
+  />
 
-    <ul class="calculator__select" *ngIf="isOpenSelect" (click)="selectOption($event)">
-      <li *ngFor="let item of items" [value]="item">
-        {{item}}
-      </li>
-    </ul>
+  <ul
+    class="calculator__select"
+    *ngIf="isOpenSelect"
+    (click)="selectOption($event)"
+  >
+    <li *ngFor="let item of items" [value]="item">
+      {{ item }}
+    </li>
+  </ul>
 </div>

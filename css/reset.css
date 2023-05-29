@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   outline: 0;
 }
 
@@ -14,7 +14,8 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-a, button {
+a,
+button {
   background: none;
   border: none;
   text-decoration: none;
@@ -36,7 +37,7 @@ button:hover {
 abbr[title] {
   border-bottom: none;
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
 img {
@@ -45,7 +46,17 @@ img {
   border: 0;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -70,7 +81,14 @@ template,
   display: none;
 }
 
-table, caption, tbody, tfoot, thead, tr, th, td {
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
   border: 0;
   font-size: 100%;
   vertical-align: middle;
@@ -126,11 +144,14 @@ samp {
 
 hr {
   -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   height: 0;
   overflow: visible;
 }
 
-input, textarea, select, button {
+input,
+textarea,
+select,
+button {
   font: inherit;
 }

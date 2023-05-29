@@ -1,14 +1,20 @@
-import { Directive, ElementRef, Input, HostListener, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  HostListener,
+  Renderer2,
+} from '@angular/core';
 
 @Directive({
-  selector: '[tooltip]'
+  selector: '[tooltip]',
 })
 export class TooltipDirective {
   @Input('tooltip') tooltipText = '';
 
   private tooltipElement: HTMLElement | null = null;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   @HostListener('mouseenter')
   onMouseEnter() {
@@ -26,13 +32,19 @@ export class TooltipDirective {
     const text = this.renderer.createText(this.tooltipText);
     this.renderer.appendChild(this.tooltipElement, text);
     this.renderer.addClass(this.tooltipElement, 'tooltip');
-    this.renderer.appendChild(this.elementRef.nativeElement, this.tooltipElement);
+    this.renderer.appendChild(
+      this.elementRef.nativeElement,
+      this.tooltipElement
+    );
   }
 
   private hideTooltip() {
     // Удаление элемента подсказки из DOM
     if (this.tooltipElement) {
-      this.renderer.removeChild(this.elementRef.nativeElement, this.tooltipElement);
+      this.renderer.removeChild(
+        this.elementRef.nativeElement,
+        this.tooltipElement
+      );
       this.tooltipElement = null;
     }
   }
