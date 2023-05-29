@@ -1,17 +1,25 @@
-<div class="calculator__input-wrapper" (click)="openSelect()">
-  <input type="text" class="calculator__input" [value]="currency?.name ?? ''" (input)="filterInput($event)">
-      <div class="input-append">
-        <div class="apr-icon">APR {{currency?.apr}}</div>
-      </div>
+<div class="calculator__input-wrapper">
+  <input
+    type="text"
+    class="calculator__input"
+    [value]="currency?.name ?? ''"
+    (click)="openSelect()"
+    (input)="filterInput($event)"
+    (focusout)="onBlur()"
+  >
 
-  <ul class="calculator__select" *ngIf="isOpenSelect">
-    <ng-container *ngIf="options$ | async as options">
+  <div class="input-append" *ngIf="currency">
+    <div class="apr-icon">APR {{currency.apr}}</div>
+  </div>
+
+  <ng-container *ngIf="options$ | async as options">
+    <ul class="calculator__select">
       <li *ngFor="let item of options" (click)="selectOption(item)">
         <div class="option">
           <a [innerHTML]="item.name"></a>
           <div class="apr-icon">APR {{item.apr}}</div>
         </div>
       </li>
-    </ng-container>
-  </ul>
+    </ul>
+  </ng-container>
 </div>

@@ -1,9 +1,8 @@
-import { Component, Input, Output, EventEmitter, forwardRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { ICurrency } from 'src/app/shared/interfaces';
-
 @Component({
     selector: 'app-autocomplete',
     templateUrl: './autocomplete.component.html',
@@ -16,15 +15,13 @@ import { ICurrency } from 'src/app/shared/interfaces';
         }
     ]
 })
-export class AutocompleteComponent implements OnInit, ControlValueAccessor {
+export class AutocompleteComponent implements ControlValueAccessor {
   @Input() items: ICurrency[] = [];
   @Output() changed = new EventEmitter<ICurrency>();
 
-  filteredOptions: ICurrency[] = [];
-  optionsSource$ = new Subject<ICurrency[]>();
+  optionsSource$ = new BehaviorSubject<ICurrency[]>([]);
   options$: Observable<ICurrency[]> | null = null;
 
-  isOpenSelect: boolean = false;
   currency: ICurrency | null = null;
 
   private propagateChange: any = () => { };
@@ -32,10 +29,6 @@ export class AutocompleteComponent implements OnInit, ControlValueAccessor {
 
   constructor() {
     this.options$ = this.optionsSource$.asObservable();
-  }
-
-  ngOnInit(): void {
-      this.optionsSource$.next(this.items);
   }
 
   writeValue(currency: ICurrency): void {
@@ -50,23 +43,40 @@ export class AutocompleteComponent implements OnInit, ControlValueAccessor {
       this.propagateTouched = fn;
   }
 
+    onBlur(): void {
+      this.propagateTouched();
+      this.currency = this.items[0];
+      this.propagateChange(this.currency);
+      this.changed.emit(this.currency);
+  }
+
   openSelect(): void {
       this.optionsSource$.next(this.items);
-      this.isOpenSelect = true;
   }
 
   selectOption(currency: ICurrency): void {
       this.currency = currency;
       this.propagateChange(currency);
       this.changed.emit(currency);
-      this.isOpenSelect = false;
+      this.optionsSource$.next([]);
   }
 
   filterInput(eventInput: Event): void {
     const { value } = (<HTMLInputElement>eventInput.target);
-    this.isOpenSelect = true;
+    let filteredOptions: ICurrency[] = [];
 
-    const filteredOptions = this.items.filter((option: ICurrency) => option.name.toLowerCase().includes(value.toLowerCase()));
-    this.optionsSource$.next(filteredOptions);
+    if(!value) {
+      this.optionsSource$.next([]);
+      this.currency = null;
+
+      return;
+    }
+
+      filteredOptions = this.filterOptions(value);
+      this.optionsSource$.next(filteredOptions);
+  }
+
+  private filterOptions(inputValue: string): ICurrency[] {
+    return this.items.filter((option: ICurrency) => option.name.toLowerCase().includes(inputValue.toLowerCase()));
   }
 }
