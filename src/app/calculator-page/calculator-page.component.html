@@ -12,7 +12,7 @@
 
 
           <app-form-field label="Period?" [control]="form.get('period')">
-            <custom-select formControlName="period" selectedItem="12" [items]="periods"></custom-select>
+            <custom-select formControlName="period" selectedItem="12" [items]="periods" [isDisabled]="true"></custom-select>
           </app-form-field>
 
           <app-form-field [control]="form.get('checkbox')">

@@ -61,7 +61,6 @@ export class AutocompleteComponent implements OnInit, ControlValueAccessor {
 
 
   selectEvent(item: ICurrency): void {
-        console.log('bbvnvn');
         this.propagateChange(item);
         this.changed.emit(item);
   }
