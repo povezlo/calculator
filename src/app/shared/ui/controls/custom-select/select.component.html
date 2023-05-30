@@ -1,13 +1,13 @@
-<div class="calculator__input-wrapper" (click)="openSelect()">
+<div class="input__wrapper" (click)="openSelect()">
   <input
     type="text"
-    class="calculator__input"
+    class="input__field hover"
     [value]="value"
     [disabled]="isBlocked"
   />
 
   <ul
-    class="calculator__select"
+    class="select"
     *ngIf="isOpenSelect"
     (click)="selectOption($event)"
   >

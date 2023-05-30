@@ -1,0 +1,6 @@
+@import '../variablies/layout.scss';
+
+@mixin size($width: $width-card, $height: $height-card) {
+  width: $width;
+  height: $height;
+}

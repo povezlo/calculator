@@ -1,0 +1,52 @@
+@import '../mixins/typography-mixin.scss';
+@import '../variablies';
+
+.select-options {
+  @include typography-font-normal($font-size: $font-size-base, $line-height: 20px);
+}
+
+.text-select-caption {
+  @include typography-font-normal($font-size: 14px, $line-height: $line-heigh-base, $color: $caption-text-color);
+}
+
+.select {
+  position: relative;
+  width: 100%;
+  background: $accent-color;
+  @extend .box-shadow-3;
+  border-radius: 6px;
+  z-index: $z-index-popup;
+
+  &>li {
+    list-style: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+
+    &:hover {
+      background: $input-bg-color;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+  }
+
+  & > li {
+    list-style: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+
+    &:hover {
+      background: $input-bg-color;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

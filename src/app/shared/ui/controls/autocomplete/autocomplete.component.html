@@ -1,7 +1,7 @@
-<div class="calculator__input-wrapper">
+<div class="input__wrapper">
   <input
     type="text"
-    class="calculator__input"
+    class="input__field hover"
     [value]="currency?.name ?? ''"
     (click)="openSelect()"
     (input)="filterInput($event)"
@@ -9,15 +9,15 @@
   />
 
   <div class="input-append" *ngIf="currency">
-    <div class="apr-icon">APR {{ currency.apr }}</div>
+    <div class="badge">APR {{ currency.apr }}</div>
   </div>
 
   <ng-container *ngIf="options$ | async as options">
-    <ul class="calculator__select">
+    <ul class="select">
       <li *ngFor="let item of options" (click)="selectOption(item)">
-        <div class="option">
+        <div class="select__option">
           <a [innerHTML]="item.name"></a>
-          <div class="apr-icon">APR {{ item.apr }}</div>
+          <div class="badge">APR {{ item.apr }}</div>
         </div>
       </li>
     </ul>

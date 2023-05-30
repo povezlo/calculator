@@ -1,0 +1,31 @@
+@import '../typography.scss';
+
+.form-field {
+  width: 547px;
+  height: 88px;
+  padding: 16px 0;
+  margin-bottom: 20px;
+
+  &__label {
+    display: block;
+    margin: 0 0 6px 0;
+    @extend .text-label;
+  }
+
+  &__control {
+    display: block;
+  }
+
+  &_inline {
+    display: flex;
+
+    >.form-field__label {
+      padding: 10px 12px 10px 0;
+      width: 30%;
+    }
+
+    >.form-field__control {
+      width: 70%;
+    }
+  }
+}

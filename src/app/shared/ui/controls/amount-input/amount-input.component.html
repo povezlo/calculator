@@ -1,7 +1,7 @@
-<div class="calculator__input-wrapper">
+<div class="input__wrapper">
   <input
     type="text"
-    class="calculator__input"
+    class="input__field"
     [value]="investmentAmount"
     [placeholder]="placeholder"
     [disabled]="isDisabled"
@@ -9,11 +9,11 @@
     (setDefaultValue)="resetCurrency()"
     appDigitsLimit
   />
-  <div class="calculator__button-wrapper">
-    <button (click)="decreaseAmount()" class="calculator__button btn-minus">
+  <div class="input__button-wrapper">
+    <button (click)="decreaseAmount()" class="btn__input btn-minus">
       -
     </button>
-    <button (click)="increaseAmount()" class="calculator__button btn-plus">
+    <button (click)="increaseAmount()" class="btn__input btn-plus">
       +
     </button>
   </div>

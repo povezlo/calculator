@@ -1,0 +1,18 @@
+@import '../mixins/typography-mixin.scss';
+@import '../variablies/color.scss';
+
+.text-badge {
+  @include typography-font-bold($font-size: 12px, $line-height: 14px, $color: $accent-color);
+}
+
+.badge {
+  width: 59px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 22px;
+  @extend .text-badge;
+  background: $badge-bg-color;
+  border-radius: 4px;
+}

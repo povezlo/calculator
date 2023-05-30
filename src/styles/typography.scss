@@ -1,0 +1,33 @@
+@import './variablies';
+@import './mixins';
+
+.box-shadow-1 {
+  @include box-shadow(0px 0px 20px rgba(0, 0, 0, 0.1))
+}
+
+.box-shadow-2 {
+  @include box-shadow(0px 4px 8px 0px rgba(0, 0, 0, 0.25));
+}
+
+.box-shadow-3 {
+  @include box-shadow(0px 0px 10px rgba(0, 0, 0, 0.1));
+}
+
+.text-subtitle {
+  @include typography-font-normal($font-size: $font-size-base, $line-height: $line-heigh-base, $color: $accent-color);
+}
+
+.text-label {
+  @include typography-font-bold();
+}
+
+.text-prime {
+  @include typography-font-bolder($font-size: 55px, $line-height: 64px);
+}
+
+small {
+  @include base-typography;
+  @include typography-font-normal($font-size: 12px, $line-height: $line-heigh-base, $color: $accent-color);
+  font-weight: 300;
+}
+

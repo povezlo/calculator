@@ -1,0 +1,36 @@
+@import '../mixins';
+@import '../variablies/color.scss';
+
+.btn-size-lg {
+  @include size($width: 321px, $height: 48px);
+}
+
+.text-button-lg {
+  @include typography-font-bolder();
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.btn-lg {
+  box-sizing: border-box;
+  border: 2px solid $accent-color;
+  border-radius: 7px;
+}
+
+.btn {
+  &__input {
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    color: $accent-color;
+    border-radius: 50%;
+
+    &.btn-minus {
+      background: $minus-btn-color;
+    }
+
+    &.btn-plus {
+      background: $plus-btn-color;
+    }
+  }
+}

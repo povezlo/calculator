@@ -1,0 +1,43 @@
+@import '../mixins/';
+@import '../variablies';
+
+.input-size {
+  @include size($width: 547px, $height: 50px);
+}
+
+.text-input {
+  @include typography-font-bold($font-size: 18px, $line-height: 20px, $color: $input-text-color);
+}
+
+.input {
+  &__wrapper {
+    position: relative;
+
+    .input-append {
+      position: absolute;
+      top: 16px;
+      left: 250px;
+    }
+  }
+
+  &__field {
+    @extend .input-size;
+    @extend .text-input;
+    padding: 16px;
+    padding-left: 22px;
+    background: $input-bg-color;
+    border-style: none;
+    &.hover:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__button-wrapper {
+    position: absolute;
+    top: 16px;
+    left: 115px;
+    width: 43px;
+    display: flex;
+    justify-content: space-between;
+  }
+}

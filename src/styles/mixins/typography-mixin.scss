@@ -1,0 +1,34 @@
+@import '../variablies';
+
+@mixin base-typography {
+  font-family: $font-base;
+  font-style: normal;
+}
+
+@mixin typography-font-normal($font-size: $font-size-base, $line-height: $line-heigh-base, $color: $label-text-color) {
+  @include base-typography;
+  font-weight: 400;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin typography-font-bold($font-size: $font-size-base, $line-height: $line-heigh-base, $color: $label-text-color) {
+  @include base-typography;
+  font-weight: 500;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin typography-font-bolder($font-size: 18px, $line-height: 21px, $color: $accent-color) {
+  @include base-typography;
+  font-weight: 700;
+  font-size: $font-size;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin box-shadow($box-shadow) {
+  box-shadow: $box-shadow;
+}
