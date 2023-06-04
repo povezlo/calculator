@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   forwardRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {Value} from 'src/app/shared/interfaces';
@@ -12,6 +13,7 @@ import {Value} from 'src/app/shared/interfaces';
   selector: 'app-custom-checkbox',
   templateUrl: './custom-checkbox.component.html',
   styleUrls: ['./custom-checkbox.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
