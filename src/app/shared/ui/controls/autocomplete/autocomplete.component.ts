@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   forwardRef,
   ChangeDetectionStrategy,
 } from '@angular/core';
@@ -25,7 +23,6 @@ import {ICurrency} from 'src/app/shared/interfaces';
 })
 export class AutocompleteComponent implements ControlValueAccessor {
   @Input() items: ICurrency[] = [];
-  @Output() changed = new EventEmitter<ICurrency>();
 
   optionsSource$ = new BehaviorSubject<ICurrency[]>([]);
   options$: Observable<ICurrency[]> | null = null;
@@ -55,7 +52,6 @@ export class AutocompleteComponent implements ControlValueAccessor {
     this.propagateTouched();
     this.currency = this.items[0];
     this.propagateChange(this.currency);
-    this.changed.emit(this.currency);
   }
 
   openSelect(): void {
@@ -65,7 +61,6 @@ export class AutocompleteComponent implements ControlValueAccessor {
   selectOption(currency: ICurrency): void {
     this.currency = currency;
     this.propagateChange(currency);
-    this.changed.emit(currency);
     this.optionsSource$.next([]);
   }
 

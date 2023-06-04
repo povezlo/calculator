@@ -1,10 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   forwardRef,
   Input,
-  Output,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Amount} from 'src/app/shared/interfaces';
@@ -25,7 +23,6 @@ import {transformCurrency, transformUSDtoNumber} from 'src/app/shared/utils';
 })
 export class AmountInputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
-  @Output() changed = new EventEmitter<string>();
   investmentAmount = '';
   isDisabled = false;
 
@@ -51,7 +48,6 @@ export class AmountInputComponent implements ControlValueAccessor {
   onKeyup(eventInput: Event): void {
     this.investmentAmount = (<HTMLInputElement>eventInput.target).value;
     this.propagateChange(this.investmentAmount);
-    this.changed.emit(this.investmentAmount);
   }
 
   onBlur(): void {

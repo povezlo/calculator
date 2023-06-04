@@ -2,8 +2,6 @@ import {
   Component,
   OnInit,
   Input,
-  Output,
-  EventEmitter,
   forwardRef,
   ChangeDetectionStrategy,
 } from '@angular/core';
@@ -27,7 +25,6 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   @Input() items: string[] = [];
   @Input() selectedItem = 'Select';
   @Input() isDisabled: boolean | null = null;
-  @Output() changed = new EventEmitter<Value>();
 
   value: Value | null = null;
   isOpenSelect = false;
@@ -66,6 +63,5 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     const value = (event.target as HTMLInputElement).value;
     this.value = value;
     this.propagateChange(value);
-    this.changed.emit(value);
   }
 }

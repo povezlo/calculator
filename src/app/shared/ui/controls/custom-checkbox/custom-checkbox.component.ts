@@ -1,8 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
   forwardRef,
   ChangeDetectionStrategy,
 } from '@angular/core';
@@ -24,12 +22,12 @@ import {Value} from 'src/app/shared/interfaces';
 })
 export class CheckboxComponent implements ControlValueAccessor {
   @Input() label = 'Lorem ipsum';
-  @Output() changed = new EventEmitter<boolean>();
 
   value: Value[] = [];
   isDisabled = false;
 
   private propagateChange: any = () => {};
+  private propagateTouched: any = () => {};
 
   writeValue(value: Value[]): void {
     this.value = value;
@@ -39,7 +37,9 @@ export class CheckboxComponent implements ControlValueAccessor {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {}
+  registerOnTouched(fn: any): void {
+    this.propagateTouched = fn;
+  }
 
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
@@ -48,7 +48,6 @@ export class CheckboxComponent implements ControlValueAccessor {
   onChanged(evt: Event): void {
     const selected = (evt.target as HTMLInputElement).checked;
     this.propagateChange(selected);
-    this.changed.emit(selected);
   }
 
   isChecked(value: Value): boolean {
