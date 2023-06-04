@@ -5,7 +5,7 @@ import {
   Input,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {Amount} from 'src/app/shared/interfaces';
+import {Amount, PropagateFn} from 'src/app/shared/interfaces';
 import {transformCurrency, transformUSDtoNumber} from 'src/app/shared/utils';
 
 @Component({
@@ -26,18 +26,18 @@ export class AmountInputComponent implements ControlValueAccessor {
   investmentAmount = '';
   isDisabled = false;
 
-  private propagateChange: (fn: any) => void = (fn: any) => {};
-  private propagateTouched: () => void = () => {};
+  private propagateChange?: PropagateFn<string>;
+  private propagateTouched?: PropagateFn<void>;
 
   writeValue(value: string): void {
     this.investmentAmount = value;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: PropagateFn<string>): void {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: PropagateFn<void>): void {
     this.propagateTouched = fn;
   }
 
@@ -47,16 +47,16 @@ export class AmountInputComponent implements ControlValueAccessor {
 
   onKeyup(eventInput: Event): void {
     this.investmentAmount = (<HTMLInputElement>eventInput.target).value;
-    this.propagateChange(this.investmentAmount);
+    if(this.propagateChange) this.propagateChange(this.investmentAmount);
   }
 
   onBlur(): void {
-    this.propagateTouched();
+    if(this.propagateTouched) this.propagateTouched();
   }
 
   resetCurrency(): void {
     this.investmentAmount = Amount.OneThousand;
-    this.propagateChange(this.investmentAmount);
+    if(this.propagateChange) this.propagateChange(this.investmentAmount);
   }
 
   decreaseAmount() {
@@ -67,7 +67,7 @@ export class AmountInputComponent implements ControlValueAccessor {
     const formatCurrency = transformCurrency(clearNumber, {maxValue: true});
 
     this.investmentAmount = `$${formatCurrency}`;
-    this.propagateChange(this.investmentAmount);
+    if(this.propagateChange) this.propagateChange(this.investmentAmount);
   }
 
   increaseAmount() {
@@ -78,6 +78,6 @@ export class AmountInputComponent implements ControlValueAccessor {
     const formatCurrency = transformCurrency(clearNumber, {maxValue: false});
 
     this.investmentAmount = `$${formatCurrency}`;
-    this.propagateChange(this.investmentAmount);
+    if(this.propagateChange) this.propagateChange(this.investmentAmount);
   }
 }

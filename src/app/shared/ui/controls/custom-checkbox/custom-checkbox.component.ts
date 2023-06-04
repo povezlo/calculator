@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {Value} from 'src/app/shared/interfaces';
+import {PropagateFn, Value} from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-custom-checkbox',
@@ -26,18 +26,18 @@ export class CheckboxComponent implements ControlValueAccessor {
   value: Value[] = [];
   isDisabled = false;
 
-  private propagateChange: any = () => {};
-  private propagateTouched: any = () => {};
+  private propagateChange?: PropagateFn<boolean>;
+  private propagateTouched?: PropagateFn<void>;
 
   writeValue(value: Value[]): void {
     this.value = value;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: PropagateFn<boolean>): void {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: PropagateFn<void>): void {
     this.propagateTouched = fn;
   }
 
@@ -47,7 +47,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   onChanged(evt: Event): void {
     const selected = (evt.target as HTMLInputElement).checked;
-    this.propagateChange(selected);
+    if(this.propagateChange) this.propagateChange(selected);
   }
 
   isChecked(value: Value): boolean {

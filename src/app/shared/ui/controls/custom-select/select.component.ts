@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
-import {Value} from 'src/app/shared/interfaces';
+import {PropagateFn, Value} from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-custom-select',
@@ -30,24 +30,22 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   isOpenSelect = false;
   isBlocked = false;
 
-  constructor() {}
-
   ngOnInit(): void {
     this.isBlocked = !!this.isDisabled;
   }
 
-  private propagateChange: any = () => {};
-  private propagateTouched: any = () => {};
+  private propagateChange?: PropagateFn<string>;
+  private propagateTouched?: PropagateFn<void>;
 
   writeValue(value: Value): void {
     this.value = value;
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: PropagateFn<string>): void {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: PropagateFn<void>): void {
     this.propagateTouched = fn;
   }
 
@@ -62,6 +60,6 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   selectOption(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.value = value;
-    this.propagateChange(value);
+    if(this.propagateChange) this.propagateChange(value);
   }
 }
